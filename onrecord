@@ -1,0 +1,52 @@
+$arrMeses = array('1'=>'jan',
+				 '2'=>'fev',
+				 '3'=>'mar',
+				 '4'=>'abr',
+				 '5'=>'mai',
+				 '6'=>'jun',
+				 '7'=>'jul',
+				 '8'=>'ago',
+				 '9'=>'set',
+				 '10'=>'out',
+				 '11'=>'nov',
+				 '12'=>'dez'
+				 );
+
+$arrVal=array();
+$Meses = explode(',',[vMes]);
+$vValor = '';
+
+sc_lookup(ds,"SELECT SUM(Valor), tbllanc.mes FROM tbllanc WHERE conta = {tbllanc.conta} AND ano={tbllanc.ano} AND mes IN ([vMes]) AND tipo ='{tbllanc.tipo}'  AND tbllanc.caixa IN ([ventidade]) AND DAY(tbllanc.data) BETWEEN [vdiaini]  AND [vdiafim] AND tbllanc.CentroCusto = {tbllanc.centrocusto}
+GROUP BY Mes ORDER BY ABS(MONTH(DATA))");
+if(!empty({ds[0][0]}))
+{
+	foreach({ds} as $Val)
+	{
+		$vMes=$Val[1];
+		$vValor=$Val[0];
+		$arrVal[$vMes]=$vValor;	
+	}
+
+	foreach($Meses as $MesValor)
+	{
+		if(!empty($arrVal[$MesValor]))
+		{
+			$NomeCampo=$arrMeses[$MesValor];
+			$Valor=$arrVal[$MesValor];
+			$this->$NomeCampo=$Valor;
+		}
+		else
+		{
+			$NomeCampo=$arrMeses[$MesValor];
+			$this->$NomeCampo=0;
+		}
+	}
+}
+else
+{
+	foreach($Meses as $MesValor)
+	{
+		$NomeCampo=$arrMeses[$MesValor];
+		$this->$NomeCampo=0;
+	}
+}
