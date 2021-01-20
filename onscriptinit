@@ -1,0 +1,41 @@
+{jan} = 0;
+{fev} = 0;
+{mar} = 0;
+{abr} = 0;
+{mai} = 0;
+{jun} = 0;
+{jul} = 0;
+{ago} = 0;
+{set} = 0;
+{out} = 0;
+{nov} = 0;
+{dez} = 0;
+
+//___________ OnscriptInit
+
+//$_SESSION['sc_session'][$this->sc_page]['cns_entradas_saidas'];
+
+$arrMeses = array('1'=>'jan',
+				 '2'=>'fev',
+				 '3'=>'mar',
+				 '4'=>'abr',
+				 '5'=>'mai',
+				 '6'=>'jun',
+				 '7'=>'jul',
+				 '8'=>'ago',
+				 '9'=>'set',
+				 '10'=>'out',
+				 '11'=>'nov',
+				 '12'=>'dez'
+				 );
+foreach($arrMeses as $Mes)
+{
+	$this->NM_cmp_hidden[$Mes] = "off";
+}
+
+$MesOn=explode(',',[vMes]);
+foreach($MesOn as $OnMes)
+{
+	$Memes=$arrMeses[$OnMes];
+	$this->NM_cmp_hidden[$Memes] = "on";
+}
